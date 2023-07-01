@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inder&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+body {
+  min-height: 600px;
+}
+
+/* Skip */
+.skip {
+  z-index: 1;
+  color: #FFFFFF;
+  font-size: 17px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  /* Position */
+  position: absolute;
+  top: 30px;
+  right: 3%;
+}
+
+/* Logo */
+.logo {
+  /* size */
+  width: 260px;
+  height: 260px;
+  /* position */
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  top: -130px;
+  margin-top: -130px;
+  cursor: pointer;
+}
+
+/* Part 1 */
+.part_1 {
+  height: 100vh;
+  width: 100vw;
+  background-color: #1DA1F2;
+}
+
+/* Part 1 animation */
+.animation_1 {
+  animation-name: move_downwards;
+  animation-delay: 800ms;
+  animation-duration: 1.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes move_downwards {
+  0% {
+    top: -130px;
+    transform: scaleX(1);
+  }
+  30% {
+    top: 60%;
+  }
+  40% {
+    top: 50%;
+    transform: scaleX(1);
+  }
+  42% {
+    top: 50%;
+    transform: scaleX(1.2);
+  }
+  100% {
+    top: 50%;
+    transform: scaleX(-1);
+  }
+}
+/* Part 2 */
+.part_2 {
+  min-height: 600px;
+  height: 100vh;
+  width: 100%;
+  background-color: #1DA1F2;
+  display: none;
+  /* flexbox */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Part 2 animation */
+.animation_2 {
+  /* diferences */
+  bottom: 0;
+  top: 50%;
+  transform: scaleX(-1);
+  animation-name: move_upwards;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes move_upwards {
+  0% {
+    top: 50%;
+    transform: scaleX(-1);
+    width: 257px;
+    height: 257px;
+  }
+  15% {
+    top: 55%;
+    transform: scaleX(-1.2);
+    width: 257px;
+    height: 257px;
+  }
+  100% {
+    top: 155px;
+    transform: scaleX(1);
+    width: 126px;
+    height: 126px;
+  }
+}
+/* form container */
+.form_container {
+  /* Size */
+  min-height: 570px;
+  width: 100%;
+  margin-bottom: 50px;
+  overflow: hidden;
+  /* position */
+  position: relative;
+  /* FLexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Content container */
+.content_container {
+  width: 330px;
+  max-width: 95%;
+  /* flexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Animation */
+  animation-name: slideup;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+  /* Title */
+}
+.content_container .title_container {
+  /* flexbox */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 50px;
+}
+.content_container .title_container span {
+  color: #FFF;
+}
+.content_container .title_container .title_1 {
+  font-family: "Indie Flower", cursive;
+  padding-top: 10px;
+  font-size: 65px;
+}
+.content_container .title_container .title_2 {
+  font-family: "Inder", sans-serif;
+  font-size: 60px;
+}
+
+/* Form slide up animation */
+@keyframes slideup {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* Form */
+form {
+  width: 100%;
+  /* FLexbox */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Input container */
+  /* Submit button */
+}
+form .input_container {
+  width: 100%;
+}
+form .input_container span {
+  font-size: 14px;
+  letter-spacing: 0.28px;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+form .input_container input {
+  border-radius: 8px;
+  background: #208BCD;
+  height: 48px;
+  border: none;
+}
+form .input_container input:focus {
+  background: #208BCD;
+  border: 1px solid #FFFFFF;
+}
+form .input_container input:hover {
+  border: 1px solid #FFFFFF;
+}
+form input[type=submit] {
+  margin: 20px 0 30px 0;
+  width: 100%;
+  max-width: 330px;
+  border-radius: 100px;
+  height: 55px;
+  background-color: #ffffff;
+  border: none;
+  /* Text style */
+  text-align: center;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.36px;
+  color: #1DA1F2;
+  transition: all 0.2s;
+}
+form input[type=submit]:hover {
+  background-color: #e6e6e6;
+  color: #208BCD;
+}
+
+/* End of form */
+/* Footer */
+.footer span {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.28px;
+}
+.footer a {
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.28px;
+  color: #0011FF;
+}/*# sourceMappingURL=login.css.map */

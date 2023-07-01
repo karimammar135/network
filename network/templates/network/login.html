@@ -1,24 +1,116 @@
-{% extends "network/layout.html" %}
+{% load static %}
 
-{% block body %}
+<!DOCTYPE html>
 
-    <h2>Login</h2>
+<html lang="en">
+    <head>
+        <title>Social Network</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/login.css' %}" rel="stylesheet">
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+        <!-- Meta -->
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/a122ebbd90.js" crossorigin="anonymous"></script>
+
+        <!-- icon -->
+        <link href="{% static 'network/media/network-icon.png' %}" rel="icon">
+
+        {% if animated == True %}
+            <!-- Javascript -->
+            <script src="{% static 'network/login.js' %}"></script>
+        {% endif %}
+
+        {% if message %}
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    message = document.querySelector('#message').dataset.message;
+                    alert(`${message}`);
+                });
+            </script>
+        {% endif %}
+
+    </head>
+
+    <body>
+        
+        {% if animated == True %}
+            <!-- part 1 -->
+            <div class="part_1">
+
+                <!-- Logo -->
+                <img src="{% static 'network/media/network-icon-white.png' %}" class="logo animation_1">
+
+            </div>
+        {% endif %}
+
+        {% if message %}
+            <div id="message" data-message="{{ message }}"></div>
+        {% endif %}
+
+        <!-- part 2 -->
+        {% if animated == True %}
+            <div class="part_2">
+        {% else %}
+            <div class="part_2" style="display: flex;">
+        {% endif %}
+
+            <!-- Skip -->
+            <a href="{% url 'index' %}" class="skip">skip</a>
+
+            <!-- Form container -->
+            <div class="form_container">
+
+                <!-- Logo -->
+                {% if animated == True %}
+                    <img src="{% static 'network/media/network-icon-white.png' %}" class="logo animation_2">
+                    <!-- Content -->
+                    <div class="content_container">
+                {% else %}
+                    <img src="{% static 'network/media/network-icon-white.png' %}" class="logo animation_2" style="animation-duration: 0s;">
+                    <!-- Content -->
+                    <div class="content_container" style="animation-duration: 0s;">
+                {% endif %}
+
+                    <!--  Title -->
+                    <div class="title_container">
+                        <span class="title_1">N</span>
+                        <span class="title_2">etwork</span>
+                    </div>
+                    
+
+                    <!-- Form -->
+                    <form action="{% url 'login' %}" method="post">
+
+                        {% csrf_token %}
+                        <div class="form-group input_container">
+                            <span>Username</span>
+                            <input autofocus class="form-control" type="text" name="username">
+                        </div>
+                        <div class="form-group input_container">
+                            <span>Password</span>
+                            <input class="form-control" type="password" name="password">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Login">
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="footer">
+                        <span>Don't have an account?</span>
+                        <a href="{% url 'register' %}">Register here.</a>
+                    </div>
+
+                </div>
+                <!-- ENd of content -->
+
+            </div>
+            <!-- ENd of Form container -->
+
         </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Login">
-    </form>
+        <!-- End of part 2 -->
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    </body>
 
-{% endblock %}
+</html>

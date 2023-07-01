@@ -1,30 +1,109 @@
-{% extends "network/layout.html" %}
+{% load static %}
 
-{% block body %}
+<!DOCTYPE html>
 
-    <h2>Register</h2>
+<html lang="en">
+    <head>
+        <title>Social Network - Register</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/register.css' %}" rel="stylesheet">
+        <link href="{% static 'network/login.css' %}" rel="stylesheet">
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+        <!-- Meta -->
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/a122ebbd90.js" crossorigin="anonymous"></script>
+
+        <!-- icon -->
+        <link href="{% static 'network/media/network-icon.png' %}" rel="icon">
+
+        <!-- Javascript -->
+        <script src="{% static 'network/register.js' %}"></script>
+
+        {% if message %}
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    message = document.querySelector('#message').dataset.message;
+                    alert(`${message}`);
+                });
+            </script>
+        {% endif %}
+
+    </head>
+
+    <body>
+        {% if message %}
+            <div id="message" data-message="{{ message }}"></div>
+        {% endif %}
+
+        <!-- part 2 -->
+        <div class="part_2" style="display: flex;">
+            <!-- Skip -->
+            <a href="{% url 'index' %}" class="skip">skip</a>
+
+            <!-- Form container -->
+            <div class="form_container">
+
+                <!-- Logo -->
+                <img src="{% static 'network/media/network-icon-white.png' %}" class="logo" style="top: 155px; transform: scaleX(1); width: 126px; height: 126px;">
+                    
+                <!-- Content -->
+                <div class="content_container" style="animation-duration: 0s; width: 675px; min-width: 50%; max-width: 95%;">
+
+                    <!--  Title -->
+                    <div class="title_container">
+                        <span class="title_1">N</span>
+                        <span class="title_2">etwork</span>
+                    </div>
+
+                    <!-- Form -->
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+
+                        <!-- First group -->
+                        <div class="first-group">
+                            <div class="form-group input_container input_p_1" style="margin-right: 10px;">
+                                <span>Username</span>
+                                <input class="form-control" autofocus type="text" name="username" required/>
+                            </div>
+                            <div class="form-group input_container">
+                                <span>Email Address</span>
+                                <input class="form-control" type="email" name="email" required/>
+                            </div>
+                        </div>
+
+                        <!-- Second group -->
+                        <div class="second-group">
+                            <div class="form-group input_container input_p_1" style="margin-right: 10px;">
+                                <span>Password</span>
+                                <input class="form-control" type="password" name="password" required/>
+                            </div>
+                            <div class="form-group input_container">
+                                <span>Confirm Password</span>
+                                <input class="form-control" type="password" name="confirmation" required/>
+                            </div>
+                        </div>
+                        
+                        <input class="btn btn-primary" type="submit" value="Register">
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="footer">
+                        <span>Already have an account?</span>
+                        <a href="{% url 'login' %}">Login here.</a>
+                    </div>
+
+                </div>
+                <!-- ENd of content -->
+
+            </div>
+            <!-- ENd of Form container -->
+
         </div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Register">
-    </form>
+        <!-- End of part 2 -->
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </body>
 
-{% endblock %}
+</html>

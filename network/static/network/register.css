@@ -1,0 +1,23 @@
+/* Fisrt input group */
+.first-group {
+  width: 100%;
+  /* flexbox */
+  display: flex;
+}
+@media (max-width: 500px) {
+  .first-group {
+    flex-wrap: wrap;
+  }
+}
+
+/* Second input group */
+.second-group {
+  width: 100%;
+  /* flexbox */
+  display: flex;
+}
+@media (max-width: 500px) {
+  .second-group {
+    flex-wrap: wrap;
+  }
+}/*# sourceMappingURL=register.css.map */

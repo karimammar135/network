@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    db: 
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: ka.12345
+
+    web:
+        build: .
+        volumes: 
+            - .:/home/karim_123/app
+        ports:
+            - "8000:8000"

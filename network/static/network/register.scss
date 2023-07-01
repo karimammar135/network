@@ -1,0 +1,22 @@
+
+/* Fisrt input group */
+.first-group {
+    width: 100%;
+    /* flexbox */
+    display: flex;
+
+    @media (max-width: 500px){
+        flex-wrap: wrap;
+    }
+}
+
+/* Second input group */
+.second-group {
+    width: 100%;
+    /* flexbox */
+    display: flex;
+
+    @media (max-width: 500px){
+        flex-wrap: wrap;
+    }
+}

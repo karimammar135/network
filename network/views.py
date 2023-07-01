@@ -10,7 +10,13 @@ from .models import User
 def index(request):
     return render(request, "network/index.html")
 
+# Animated Login View
+def animation(request):
+    return render(request, "network/login.html", {
+        "animated": True
+    })
 
+# Login view
 def login_view(request):
     if request.method == "POST":
 
@@ -25,10 +31,13 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "network/login.html", {
+                "animated": False,
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "network/login.html")
+        return render(request, "network/login.html", {
+            "animated": False
+        })
 
 
 def logout_view(request):
@@ -61,3 +70,7 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+# test
+def test(request):
+    return render(request, "network/test.html")
