@@ -1,0 +1,198 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+body{
+    height: 1200px;
+}
+
+/* logo */
+.logo {
+    width: 25px;
+    animation: grow;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+.logo-wrapper{
+    height: 65.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes grow {
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+/* hide and show element */
+.hide {
+    opacity: 0;
+    transition: opacity 1s;
+}
+.show {
+    opacity: 1;
+    transition: opacity 1s;
+}
+.delete {
+    display: none;
+}
+.nodelete {
+    display: initial;
+}
+.shrink {
+    width: 0px;
+}
+
+.top-part {
+    display: flex;
+    margin: 13px 0 20px 0;
+}
+
+/* Open close button */
+.control-btn {
+    height: 25px;
+    width: 15px;
+    background-color: black;
+    position: absolute;
+    top: 35px;
+    border: none;
+    outline: none;
+    border-radius: 0 5px 5px 0;
+    /* flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+        color: white;
+        font-size: 10px;
+        transform: rotate(270deg) scaleX(-1);
+    }
+    .open-icon {
+        transform: rotate(270deg) scaleX(-1) scaleY(-1);
+    }
+}
+.control-btn:focus {
+    border: none;
+    outline: none;
+}
+.control-btn-open {
+    transform: translateX(177px);
+    transition: transform .7s;
+}
+.control-btn-close {
+    transform: translateX(32px);
+    transition: transform .7s;
+}
+
+
+/* sidebar opened */
+.sidebaropen {
+    width: 190px;
+}
+/* sidebar closed */
+.sidebarclose {
+    width: 45px;
+}
+
+/* Sidebar */
+.sidebar {
+    /* size */
+    height: 100vh;
+    min-height: 330px;
+    
+    /* position */
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    /* flexbox */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    background-color: #1DA1F2;
+    padding-left: 13px;
+    /* transition */
+    transition: width .7s;
+
+    /* navbar */ 
+    .navbar {
+        /* flexbox */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+
+        .nav-item {
+            margin-bottom: 20px;
+        }
+    }
+
+    /* nav items */
+    .nav-item, .logout {
+        white-space: nowrap;
+        i {
+            color: white;
+            transition: color .2s;
+            margin-right: 10px;
+            width: 20px;
+        }
+        span {
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            color: #ffffff;
+            transition: color .2s, opacity .7s;
+        }
+    }
+    .nav-item:hover, .logout:hover {
+        text-decoration: none;
+        i, span {
+            color: black;
+        }
+    }
+    .logout {
+        margin-bottom: 10px;
+        margin-top: 15px;
+        i {
+            transform: rotate(180deg);
+        }
+    }
+    /* End of nav-items */
+
+    /* Title */
+    .title_container {
+        /* flexbox */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+
+        span{
+            color: #FFF;
+        }
+        .title_1 {
+            font-family: 'Indie Flower', cursive;
+            font-weight: 400;
+            padding-top: 10px;
+            font-size: 37px;
+        }
+        .title_2 {
+            font-family: 'Inder', sans-serif;
+            font-weight: 400;
+            font-size: 33px;
+        }
+    }
+}
+
+/* fixes */
+#logout_icon {
+    padding-bottom: 1px;
+}

@@ -16,44 +16,122 @@
 
         <!-- icon -->
         <link href="{% static 'network/media/network-icon.png' %}" rel="icon">
+
+        <!-- Stylesheet -->
+        <link href="{% static 'network/layout.css' %}" rel="stylesheet">
+
+        <!-- React Libraries -->
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        
     </head>
+
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Network</a>
-          
-            <div>
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><strong>{{ user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Following</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
         
+
+        <!-- React -->
+        <script type="text/babel">
+
+            // Side bar
+            function Sidebar(){
+                const[open, setOpen] = React.useState(true);
+
+                // Close sidebar
+                function closeSidebar(){
+                    if (open) {
+                        setOpen(false);
+                    }
+                    else {
+                        setOpen(true);
+                        document.querySelector('button').style.animationDirection = "reverse";
+                        document.querySelector('button').style.animationPlayState = "running";
+                    }
+                }
+
+                // Title
+                function Title(){
+                    // Opened sidebar
+                    if (open){
+                        return(
+                            <div class="title_container">
+                                <span className={open ? "show title_1": "hide title_1"}>N</span>
+                                <span className={open ? "show title_2": "hide title_2"}>etwork</span>
+                            </div>
+                        );
+                    }
+
+                    // Closed sidebar
+                    else{
+                        return(
+                            <div class="title_container">
+                                <div className="logo-wrapper">
+                                    <img src="{% static 'network/media/network-icon-white.png' %}" alt="logo" className="logo"/>
+                                </div>
+                                <span className={open ? "show title_2": "hide title_2 shrink"}>etwork</span>
+                            </div>
+                        );
+                    } 
+                }
+                // End of title
+                
+                // Main layout of sidebar
+                return (
+                    // Side bar
+                    <div className={open ? "sidebar sidebaropen": "sidebar sidebarclose"}>
+
+                        <div>
+                            <div class="top-part">
+                                
+                                <Title />
+
+                                <button onClick={closeSidebar} className={open ? "control-btn control-btn-open": "control-btn control-btn-close"}>
+                                    <i className={open ? "fa-solid fa-arrow-up-short-wide close-icon": "fa-solid fa-arrow-up-short-wide open-icon"}></i>
+                                </button>
+                            </div>
+
+                            <div class="navbar">
+                                <a class="nav-item" href="#">
+                                    <i class="fa-solid fa-house"></i>
+                                    <span className={open ? "show": "hide"}>Home</span>
+                                </a>
+                                <a class="nav-item" href="#">
+                                    <i class="fa-solid fa-envelopes-bulk"></i>
+                                    <span className={open ? "show": "hide"}>All Posts</span>
+                                </a>
+                                <a class="nav-item" href="#">
+                                    <i class="fa-brands fa-squarespace"></i>
+                                    <span className={open ? "show": "hide"}>Following</span>
+                                </a>
+                                <a class="nav-item" href="#">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span className={open ? "show": "hide"}>Profile</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <a class="logout" href="{% url 'logout' %}">
+                            <i class="fa-solid fa-arrow-right-from-bracket" id="logout_icon"></i>
+                            <span className={open ? "show": "hide"}>Logout</span>
+                        </a>
+                    </div>
+                );
+            }
+
+            // Add the components to the DOM
+            ReactDOM.render(<Sidebar />, document.querySelector('body'));
+
+        </script>
+
+
+        <!-- Body -->
         <div class="body">
             {% block body %}
             {% endblock %}
+            <span>ytgt</span>
         </div>
+
     </body>
+
 </html>
