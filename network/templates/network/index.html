@@ -1,5 +1,235 @@
-{% extends "network/layout.html" %}
+{% load static %}
 
-{% block body %}
-    TODO
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/a122ebbd90.js" crossorigin="anonymous"></script>
+
+        <!-- icon -->
+        <link href="{% static 'network/media/network-icon.png' %}" rel="icon">
+
+        <!-- Stylesheet -->
+        <link href="{% static 'network/layout.css' %}" rel="stylesheet">
+
+        <!-- React Libraries -->
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        
+    </head>
+
+    <body style="display: flex;">
+        
+        <!-- Detect the authentication of the user -->
+        <div id="sidebar-container"></div>
+        {% if user.is_authenticated %}
+            <div id="authenticated" style="opacity: 0; width: 0; height: 0;">true</div>
+        {% else %}
+            <div id="authenticated" style="opacity: 0; width: 0; height: 0;">false</div>
+        {% endif %}
+
+        <!-- React layout -->
+        <script type="text/babel">
+            window.onload = () => {
+                Show('home_page');
+            }
+
+            // Show page
+            function Show(page){
+                console.log(page);
+                // Hide all pages 
+                document.querySelectorAll('.page').forEach((el) => {
+                    el.style.display = 'none';
+                });
+
+                // Show the clicked page
+                document.querySelector(`#${page}`).style.display = 'block';
+
+                document.querySelectorAll('.item').forEach(function(el){
+                    el.style.color = 'white';
+                });
+
+                // Focus on the clicked page
+                document.querySelectorAll(`.${page}_item`).forEach(function(el) {
+                    el.style.color = 'black';
+                });
+            }
+            
+
+            // Side bar
+            function Sidebar(){
+                const auth = document.querySelector('#authenticated').innerHTML;
+                function toBool(string){
+                    if (string === 'true'){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                const[is_authenticated, setState] = React.useState(toBool(auth));
+                const[open, setOpen] = React.useState(true);
+
+                // Close sidebar
+                function closeSidebar(){
+                    if (open) {
+                        setOpen(false);
+                    }
+                    else {
+                        setOpen(true);
+                        document.querySelector('button').style.animationDirection = "reverse";
+                        document.querySelector('button').style.animationPlayState = "running";
+                    }
+                }
+
+                // Title
+                function Title(){
+                    // Opened sidebar
+                    if (open){
+                        return(
+                            <div class="title_container">
+                                <span className={open ? "show title_1": "hide title_1"}>N</span>
+                                <span className={open ? "show title_2": "hide title_2"}>etwork</span>
+                            </div>
+                        );
+                    }
+
+                    // Closed sidebar
+                    else{
+                        return(
+                            <div class="title_container">
+                                <div className="logo-wrapper">
+                                    <img src="/static/network/media/network-icon-white.png" alt="logo" className="logo"/>
+                                </div>
+                                <span className={open ? "show title_2": "hide title_2 shrink"}>etwork</span>
+                            </div>
+                        );
+                    } 
+                }
+                // End of title
+                
+                // Main layout of sidebar
+                return (
+                    // Side bar
+                    <div className={open ? "sidebar sidebaropen": "sidebar sidebarclose"}>
+
+                        <div>
+                            <div class="top-part">
+                                
+                                <Title />
+
+                                <button onClick={closeSidebar} className={open ? "control-btn control-btn-open": "control-btn control-btn-close"}>
+                                    <i className={open ? "fa-solid fa-arrow-up-short-wide close-icon": "fa-solid fa-arrow-up-short-wide open-icon"}></i>
+                                </button>
+                            </div>
+
+                            <div class="navbar">
+                                <a class="nav-item" href="#" onClick={() => Show('home_page')}>
+                                    <i class="fa-solid fa-house home_page_item item"></i>
+                                    <span className={open ? "show home_page_item item": "hide"}>Home</span>
+                                </a>
+                                <a class="nav-item" href="#" onClick={() => Show('allposts_page')}>
+                                    <i class="fa-solid fa-envelopes-bulk allposts_page_item item"></i>
+                                    <span className={open ? "show allposts_page_item item": "hide"}>All Posts</span>
+                                </a>
+                                
+                                <a className={is_authenticated ? "nav-item": "delete"} href="#" onClick={() => Show('following_page')}>
+                                    <i class="fa-brands fa-squarespace following_page_item item"></i>
+                                    <span className={open ? "show following_page_item item": "hide"}>Following</span>
+                                </a>
+                                
+                                <a class="nav-item" href="#" onClick={() => Show('profile_page')}>
+                                    <i class="fa-solid fa-user profile_page_item item"></i>
+                                    <span className={open ? "show profile_page_item item": "hide"} >Profile</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                        <a className={is_authenticated ? "logout": "delete"} href="{% url 'logout' %}">
+                            <i class="fa-solid fa-arrow-right-from-bracket" id="logout_icon"></i>
+                            <span className={open ? "show": "hide"}>Logout</span>
+                        </a>
+                        
+                        <div className={is_authenticated ? "delete": "wrapper"}>
+                            <a class="register" href="{% url 'register' %}">
+                                <i class="fa-regular fa-address-card"></i>
+                                <span className={open ? "show": "hide"}>Register</span>
+                            </a>
+                            <a class="logout" href="{% url 'login' %}">
+                                <i class="fa-solid fa-arrow-right-from-bracket" id="login_icon"></i>
+                                <span className={open ? "show": "hide"}>Login</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+                );
+            }
+
+            // Add the components to the DOM
+            ReactDOM.render(<Sidebar />, document.querySelector('#sidebar-container'));
+
+        </script>
+
+        <!-- Home / All posts / Following / Profile -->
+        <script type="text/babel">
+            // All posts Page
+            function Home(){
+                // Return allposts conatiner
+                return (
+                    <div id="home_page" class="page">
+                        <span>Home</span>
+                    </div>
+                );
+            }
+
+            // All posts Page
+            function AllPosts(){
+                // Return allposts conatiner
+                return (
+                    <div id="allposts_page" class="page">
+                        <span>All posts</span>
+                    </div>
+                );
+            }
+
+            // All posts Page
+            function Following(){
+                // Return allposts conatiner
+                return (
+                    <div id="following_page" class="page">
+                        <span>Following</span>
+                    </div>
+                );
+            }
+
+            // Profile Page
+            function Profile(){
+                // Return Profile conatiner
+                return (
+                    <div id="profile_page" class="page">
+                        <span>Profile</span>
+                    </div>
+                );
+            }
+            
+            // Render All Posts page to the DOM
+            ReactDOM.render(<div><Home /> <AllPosts /> <Following /> <Profile /></div>, document.querySelector('.body'));
+        
+        </script>
+
+        <!-- Body -->
+        <div class="body"></div>
+
+    </body>
+
+</html>

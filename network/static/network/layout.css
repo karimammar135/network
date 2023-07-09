@@ -138,26 +138,26 @@ body {
 .sidebar .navbar .nav-item {
   margin-bottom: 20px;
 }
-.sidebar .nav-item, .sidebar .logout {
+.sidebar .nav-item, .sidebar .logout, .sidebar .register {
   white-space: nowrap;
 }
-.sidebar .nav-item i, .sidebar .logout i {
+.sidebar .nav-item i, .sidebar .logout i, .sidebar .register i {
   color: white;
   transition: color 0.2s;
   margin-right: 10px;
   width: 20px;
 }
-.sidebar .nav-item span, .sidebar .logout span {
+.sidebar .nav-item span, .sidebar .logout span, .sidebar .register span {
   font-size: 14px;
   font-family: "Inter", sans-serif;
   font-weight: 300;
   color: #ffffff;
   transition: color 0.2s, opacity 0.7s;
 }
-.sidebar .nav-item:hover, .sidebar .logout:hover {
+.sidebar .nav-item:hover, .sidebar .logout:hover, .sidebar .register:hover {
   text-decoration: none;
 }
-.sidebar .nav-item:hover i, .sidebar .nav-item:hover span, .sidebar .logout:hover i, .sidebar .logout:hover span {
+.sidebar .nav-item:hover i, .sidebar .nav-item:hover span, .sidebar .logout:hover i, .sidebar .logout:hover span, .sidebar .register:hover i, .sidebar .register:hover span {
   color: black;
 }
 .sidebar .logout {
@@ -166,6 +166,9 @@ body {
 }
 .sidebar .logout i {
   transform: rotate(180deg);
+}
+.sidebar .register {
+  margin-top: 15px;
 }
 .sidebar .title_container {
   /* flexbox */
@@ -192,4 +195,25 @@ body {
 /* fixes */
 #logout_icon {
   padding-bottom: 1px;
+}
+
+#login_icon {
+  transform: rotate(0);
+}
+
+.wrapper {
+  /* flexbox */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Body of the container */
+.body {
+  width: -moz-max-content;
+  width: max-content;
+}
+
+/* Page */
+.page {
+  display: none;
 }/*# sourceMappingURL=layout.css.map */

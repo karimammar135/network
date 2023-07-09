@@ -135,7 +135,7 @@ body{
     }
 
     /* nav items */
-    .nav-item, .logout {
+    .nav-item, .logout, .register {
         white-space: nowrap;
         i {
             color: white;
@@ -151,7 +151,7 @@ body{
             transition: color .2s, opacity .7s;
         }
     }
-    .nav-item:hover, .logout:hover {
+    .nav-item:hover, .logout:hover, .register:hover {
         text-decoration: none;
         i, span {
             color: black;
@@ -163,6 +163,9 @@ body{
         i {
             transform: rotate(180deg);
         }
+    }
+    .register {
+        margin-top: 15px;
     }
     /* End of nav-items */
 
@@ -195,4 +198,24 @@ body{
 /* fixes */
 #logout_icon {
     padding-bottom: 1px;
+}
+#login_icon {
+    transform: rotate(0);
+}
+.wrapper {
+    /* flexbox */
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* Body of the container */
+.body {
+    width: max-content;
+}
+
+/* Page */
+.page {
+    display: none;
 }
