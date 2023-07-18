@@ -4,7 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
 
 body{
-    height: 1200px;
+    /* flexbox */
+    display: flex;
 }
 
 /* logo */
@@ -109,6 +110,9 @@ body{
     position: sticky;
     top: 0;
     left: 0;
+    @media (max-width: 620px){
+        position: fixed;
+    }
 
     /* flexbox */
     display: flex;
@@ -206,16 +210,4 @@ body{
     /* flexbox */
     display: flex;
     flex-direction: column;
-}
-
-
-
-/* Body of the container */
-.body {
-    width: max-content;
-}
-
-/* Page */
-.page {
-    display: none;
 }
